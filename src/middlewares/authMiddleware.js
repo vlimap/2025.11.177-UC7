@@ -6,7 +6,7 @@ dotenv.config();
 
 // Middleware de autenticação.
 // Ele roda ANTES do controller e decide se a requisição pode seguir.
-// 
+//
 // Como o token chega:
 // - Header: Authorization: Bearer <token>
 // - Ex.: Authorization: Bearer eyJhbGciOiJIUzI1NiIs...

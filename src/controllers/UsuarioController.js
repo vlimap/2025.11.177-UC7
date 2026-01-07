@@ -20,7 +20,9 @@ export default class UsuarioController {
 
       // Validação mínima: evita gravar registros incompletos
       if (!nome || !email || !senha) {
-        return res.status(400).json({ erro: "nome, email e senha são obrigatórios" });
+        return res
+          .status(400)
+          .json({ erro: "nome, email e senha são obrigatórios" });
       }
 
       // Regra de negócio: email deve ser único
@@ -31,7 +33,12 @@ export default class UsuarioController {
 
       // Cria o usuário no banco
       const novoUsuario = await UsuarioModel.criar({ nome, email, senha });
-      return res.status(201).json({ mensagem: "Usuário criado com sucesso!", usuario: novoUsuario });
+      return res
+        .status(201)
+        .json({
+          mensagem: "Usuário criado com sucesso!",
+          usuario: novoUsuario,
+        });
     } catch (erro) {
       // Erro inesperado (ex.: falha no banco)
       return res.status(500).json({ erro: erro.message });
@@ -78,7 +85,7 @@ export default class UsuarioController {
     // Se chegou aqui, o token é válido.
     return res.json({
       mensagem: "Acesso autorizado!",
-      usuario: req.usuario
+      usuario: req.usuario,
     });
   }
 }

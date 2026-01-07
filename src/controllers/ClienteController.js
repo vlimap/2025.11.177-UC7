@@ -10,12 +10,21 @@ export default class ClienteController {
 
       // Validação básica
       if (!nome || !documento) {
-        return res.status(400).json({ erro: "nome e documento são obrigatórios" });
+        return res
+          .status(400)
+          .json({ erro: "nome e documento são obrigatórios" });
       }
 
       // Chama o Model para inserir no banco
-      const cliente = await ClienteModel.criar({ nome, documento, email, telefone });
-      return res.status(201).json({ mensagem: "Cliente criado com sucesso!", cliente });
+      const cliente = await ClienteModel.criar({
+        nome,
+        documento,
+        email,
+        telefone,
+      });
+      return res
+        .status(201)
+        .json({ mensagem: "Cliente criado com sucesso!", cliente });
     } catch (erro) {
       // Erros comuns aqui:
       // - Duplicidade de documento (constraint UNIQUE no banco)

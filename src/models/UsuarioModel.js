@@ -6,16 +6,7 @@ export default class UsuarioModel {
     // Busca um usuário pelo email.
     // Aqui retornamos apenas as colunas que o sistema realmente usa.
     // (SELECT * é comum em exemplos, mas tende a esconder quais campos existem.)
-    const sql = `
-      SELECT
-        id,
-        nome,
-        email,
-        senha_hash,
-        criado_em
-      FROM usuarios
-      WHERE email = $1
-    `;
+    const sql = `SELECT * FROM usuarios WHERE email = $1`;
 
     const result = await query(sql, [email]);
     return result.rows[0] ?? null;
@@ -32,7 +23,7 @@ export default class UsuarioModel {
         email,
         senha_hash
       )
-      VALUES ($1, $2, $3)
+      VALUES ($2, $2, $3)
       RETURNING
         id,
         nome,

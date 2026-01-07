@@ -26,7 +26,15 @@ export default class VeiculoModel {
 
   static async criar(dados) {
     const {
-      vin, marca, modelo, ano_modelo, cor, km, preco_compra, preco_venda, status
+      vin,
+      marca,
+      modelo,
+      ano_modelo,
+      cor,
+      km,
+      preco_compra,
+      preco_venda,
+      status,
     } = dados;
 
     // Insere um novo veículo.
@@ -68,7 +76,7 @@ export default class VeiculoModel {
       km ?? 0,
       preco_compra,
       preco_venda,
-      status ?? "DISPONIVEL"
+      status ?? "DISPONIVEL",
     ];
 
     const result = await query(sql, params);
