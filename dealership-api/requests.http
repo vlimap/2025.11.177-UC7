@@ -1,0 +1,155 @@
+@baseUrl = http://localhost:3000
+@email = joel@email.com
+@senha = 123456
+@token =
+@clienteId =
+@veiculoId =
+@veiculoId2 =
+@vendaId =
+@vendaIdCancelar =
+
+###
+# Health check
+GET {{baseUrl}}/health
+
+###
+# Se o cadastro falhar por email duplicado, pule para o login.
+# @name cadastroUsuario
+POST {{baseUrl}}/usuarios/cadastro
+Content-Type: application/json
+
+{
+  "nome": "Joel Santos",
+  "email": "{{email}}",
+  "senha": "{{senha}}"
+}
+
+###
+# @name login
+POST {{baseUrl}}/usuarios/login
+Content-Type: application/json
+
+{
+  "email": "{{email}}",
+  "senha": "{{senha}}"
+}
+
+###
+@token = {{login.response.body.token}}
+
+###
+GET {{baseUrl}}/usuarios/perfil
+Authorization: Bearer {{token}}
+
+###
+# @name criarCliente
+POST {{baseUrl}}/clientes
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nome": "Ana Costa",
+  "documento": "12345678901",
+  "email": "ana@email.com",
+  "telefone": "11999999999"
+}
+
+###
+@clienteId = {{criarCliente.response.body.cliente.id}}
+
+###
+GET {{baseUrl}}/clientes
+Authorization: Bearer {{token}}
+
+###
+# @name criarVeiculo
+POST {{baseUrl}}/veiculos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "vin": "9BWZZZ377VT004251",
+  "marca": "Volkswagen",
+  "modelo": "Golf",
+  "ano_modelo": 2020,
+  "cor": "Preto",
+  "km": 45000,
+  "preco_compra": 65000.00,
+  "preco_venda": 79900.00
+}
+
+###
+@veiculoId = {{criarVeiculo.response.body.veiculo.id}}
+
+###
+GET {{baseUrl}}/veiculos
+Authorization: Bearer {{token}}
+
+###
+# @name criarVenda
+POST {{baseUrl}}/vendas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "veiculo_id": "{{veiculoId}}",
+  "cliente_id": "{{clienteId}}",
+  "preco_final": 78000.00
+}
+
+###
+@vendaId = {{criarVenda.response.body.venda.id}}
+
+###
+PATCH {{baseUrl}}/vendas/{{vendaId}}/concluir
+Authorization: Bearer {{token}}
+
+###
+POST {{baseUrl}}/vendas/{{vendaId}}/pagamentos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "metodo": "PIX",
+  "valor": 78000.00
+}
+
+###
+# Use um segundo veiculo para testar o cancelamento.
+# @name criarVeiculo2
+POST {{baseUrl}}/veiculos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "vin": "8BWZZZ377VT004252",
+  "marca": "Honda",
+  "modelo": "Civic",
+  "ano_modelo": 2021,
+  "cor": "Cinza",
+  "km": 30000,
+  "preco_compra": 70000.00,
+  "preco_venda": 88000.00
+}
+
+###
+@veiculoId2 = {{criarVeiculo2.response.body.veiculo.id}}
+
+###
+# @name criarVendaCancelar
+POST {{baseUrl}}/vendas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "veiculo_id": "{{veiculoId2}}",
+  "cliente_id": "{{clienteId}}",
+  "preco_final": 87000.00
+}
+
+###
+@vendaIdCancelar = {{criarVendaCancelar.response.body.venda.id}}
+
+###
+PATCH {{baseUrl}}/vendas/{{vendaIdCancelar}}/cancelar
+Authorization: Bearer {{token}}
