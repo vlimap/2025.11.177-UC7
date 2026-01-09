@@ -1,10 +1,11 @@
 import express from "express";
 import dotenv from "dotenv";
 
-import usuarioRoutes from "./routes/usuarioRoutes.js";
-import clienteRoutes from "./routes/clienteRoutes.js";
-import veiculoRoutes from "./routes/veiculoRoutes.js";
-import vendaRoutes from "./routes/vendaRoutes.js";
+// Rotas por domínio (organização por módulos)
+import usuarioRoutes from "./modulos/usuario/route/usuarioRoutes.js";
+import clienteRoutes from "./modulos/cliente/route/clienteRoutes.js";
+import veiculoRoutes from "./modulos/veiculo/route/veiculoRoutes.js";
+import vendaRoutes from "./modulos/venda/route/vendaRoutes.js";
 
 // Carrega variáveis do arquivo .env para process.env
 // Ex.: PORT, DATABASE_URL, JWT_SECRET, etc.
@@ -33,3 +34,4 @@ app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Servidor rodando em http://localhost:${process.env.PORT}`);
 });
+

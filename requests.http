@@ -2,6 +2,7 @@
 @email = joel@email.com
 @senha = 123456
 @token =
+@usuarioId =
 @clienteId =
 @veiculoId =
 @veiculoId2 =
@@ -38,8 +39,33 @@ Content-Type: application/json
 @token = {{login.response.body.token}}
 
 ###
+# @name perfil
 GET {{baseUrl}}/usuarios/perfil
 Authorization: Bearer {{token}}
+
+###
+@usuarioId = {{perfil.response.body.usuario.id}}
+
+###
+# GET /usuarios
+GET {{baseUrl}}/usuarios
+Authorization: Bearer {{token}}
+
+###
+# GET /usuarios/:id
+GET {{baseUrl}}/usuarios/{{usuarioId}}
+Authorization: Bearer {{token}}
+
+###
+# PUT /usuarios/:id
+PUT {{baseUrl}}/usuarios/{{usuarioId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nome": "Joel Santos (Atualizado)",
+  "email": "{{email}}"
+}
 
 ###
 # @name criarCliente
@@ -60,6 +86,24 @@ Content-Type: application/json
 ###
 GET {{baseUrl}}/clientes
 Authorization: Bearer {{token}}
+
+###
+# GET /clientes/:id
+GET {{baseUrl}}/clientes/{{clienteId}}
+Authorization: Bearer {{token}}
+
+###
+# PUT /clientes/:id
+PUT {{baseUrl}}/clientes/{{clienteId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nome": "Ana Costa (Atualizada)",
+  "documento": "12345678901",
+  "email": "ana.atualizada@email.com",
+  "telefone": "11988887777"
+}
 
 ###
 # @name criarVeiculo
@@ -86,6 +130,29 @@ GET {{baseUrl}}/veiculos
 Authorization: Bearer {{token}}
 
 ###
+# GET /veiculos/:id
+GET {{baseUrl}}/veiculos/{{veiculoId}}
+Authorization: Bearer {{token}}
+
+###
+# PUT /veiculos/:id
+PUT {{baseUrl}}/veiculos/{{veiculoId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "vin": "9BWZZZ377VT004251",
+  "marca": "Volkswagen",
+  "modelo": "Golf",
+  "ano_modelo": 2020,
+  "cor": "Preto",
+  "km": 46000,
+  "preco_compra": 65000.00,
+  "preco_venda": 80500.00,
+  "status": "DISPONIVEL"
+}
+
+###
 # @name criarVenda
 POST {{baseUrl}}/vendas
 Authorization: Bearer {{token}}
@@ -99,6 +166,26 @@ Content-Type: application/json
 
 ###
 @vendaId = {{criarVenda.response.body.venda.id}}
+
+###
+# GET /vendas
+GET {{baseUrl}}/vendas
+Authorization: Bearer {{token}}
+
+###
+# GET /vendas/:id
+GET {{baseUrl}}/vendas/{{vendaId}}
+Authorization: Bearer {{token}}
+
+###
+# PUT /vendas/:id (ajusta preco_final enquanto está em NEGOCIACAO)
+PUT {{baseUrl}}/vendas/{{vendaId}}
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "preco_final": 77500.00
+}
 
 ###
 PATCH {{baseUrl}}/vendas/{{vendaId}}/concluir
@@ -152,4 +239,21 @@ Content-Type: application/json
 
 ###
 PATCH {{baseUrl}}/vendas/{{vendaIdCancelar}}/cancelar
+Authorization: Bearer {{token}}
+
+###
+# DELETE /veiculos/:id (soft delete -> INATIVO)
+DELETE {{baseUrl}}/veiculos/{{veiculoId2}}
+Authorization: Bearer {{token}}
+
+###
+# DELETE /clientes/:id
+# Observação: pode falhar se o cliente tiver vendas relacionadas (FK).
+DELETE {{baseUrl}}/clientes/{{clienteId}}
+Authorization: Bearer {{token}}
+
+###
+# DELETE /vendas/:id
+# Regras: só remove se estiver CANCELADA e sem pagamentos.
+DELETE {{baseUrl}}/vendas/{{vendaIdCancelar}}
 Authorization: Bearer {{token}}

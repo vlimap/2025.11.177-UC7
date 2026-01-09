@@ -1,6 +1,6 @@
 # Desafio Backend — API de Concessionária (Express + PostgreSQL + JWT, sem ORM)
 
-Este repositório é um tutorial organizado (para iniciantes) inspirado no projeto anterior de **API de Usuários com JWT**: `server.js`, `controllers/`, `models/`, `routes/` e `middlewares/` com **bcrypt** e **jsonwebtoken**.  
+Este repositório é um tutorial organizado (para iniciantes) inspirado no projeto anterior de **API de Usuários com JWT**. Aqui o código está organizado por **domínio** em `src/modulos/` (cada domínio tem `model/`, `controller/` e `route/`), além de `middlewares/` com **bcrypt** e **jsonwebtoken**.  
 A diferença é que, agora, o “banco em memória (array)” foi substituído por **PostgreSQL** usando **queries SQL com `pg`** .
 
 ---
@@ -46,7 +46,7 @@ Criar uma API REST para uma concessionária, com:
 
 ---
 
-## 3. Estrutura de diretórios (organizada e familiar ao tutorial anterior)
+## 3. Estrutura de diretórios (organizada por domínio)
 
 ```
 dealership-api/
@@ -57,23 +57,25 @@ dealership-api/
 │   ├── server.js
 │   ├── database/
 │   │   └── db.js
-│   ├── controllers/
-│   │   ├── UsuarioController.js
-│   │   ├── ClienteController.js
-│   │   ├── VeiculoController.js
-│   │   └── VendaController.js
-│   ├── models/
-│   │   ├── UsuarioModel.js
-│   │   ├── ClienteModel.js
-│   │   ├── VeiculoModel.js
-│   │   └── VendaModel.js
 │   ├── middlewares/
 │   │   └── authMiddleware.js
-│   └── routes/
-│       ├── usuarioRoutes.js
-│       ├── clienteRoutes.js
-│       ├── veiculoRoutes.js
-│       └── vendaRoutes.js
+│   └── modulos/
+│       ├── usuario/
+│       │   ├── model/
+│       │   ├── controller/
+│       │   └── route/
+│       ├── cliente/
+│       │   ├── model/
+│       │   ├── controller/
+│       │   └── route/
+│       ├── veiculo/
+│       │   ├── model/
+│       │   ├── controller/
+│       │   └── route/
+│       └── venda/
+│           ├── model/
+│           ├── controller/
+│           └── route/
 ├── .env
 ├── .env.example
 ├── package.json
@@ -81,9 +83,9 @@ dealership-api/
 ```
 
 ### Por que essa estrutura?
-- `routes/` define URLs e middlewares (roteamento)
-- `controllers/` valida entrada e monta resposta HTTP
-- `models/` executa queries SQL (camada de acesso a dados)
+- `src/modulos/<dominio>/route/` define URLs e middlewares (roteamento)
+- `src/modulos/<dominio>/controller/` valida entrada e monta resposta HTTP
+- `src/modulos/<dominio>/model/` executa queries SQL (camada de acesso a dados)
 - `middlewares/` concentra autenticação (JWT)
 - `database/` centraliza conexão com PostgreSQL
 - `sql/` versiona o schema e seeds iniciais (sem ferramenta de migration)
@@ -237,18 +239,36 @@ Servidor: `http://localhost:3000`
 - `POST /usuarios/login`
 - `GET /usuarios/perfil` (protegida: exige JWT)
 
+CRUD de usuários (protegido):
+- `GET /usuarios` (listar usuários)
+- `GET /usuarios/:id` (buscar usuário)
+- `PUT /usuarios/:id` (atualizar usuário)
+- `DELETE /usuarios/:id` (remover usuário)
+
 ### 7.2. Recursos da concessionária (protegidos)
 
 - `POST /clientes` (criar cliente)
 - `GET /clientes` (listar clientes)
 
+- `GET /clientes/:id` (buscar cliente)
+- `PUT /clientes/:id` (atualizar cliente)
+- `DELETE /clientes/:id` (remover cliente)
+
 - `POST /veiculos` (criar veículo no estoque)
 - `GET /veiculos` (listar veículos)
 
+- `GET /veiculos/:id` (buscar veículo)
+- `PUT /veiculos/:id` (atualizar veículo)
+- `DELETE /veiculos/:id` (inativar veículo — soft delete)
+
 - `POST /vendas` (abrir venda/negociação)
+- `GET /vendas` (listar vendas)
+- `GET /vendas/:id` (detalhar venda + pagamentos)
+- `PUT /vendas/:id` (editar `preco_final` em `NEGOCIACAO`)
 - `PATCH /vendas/:id/concluir` (concluir venda)
 - `PATCH /vendas/:id/cancelar` (cancelar venda)
 - `POST /vendas/:id/pagamentos` (registrar pagamento)
+- `DELETE /vendas/:id` (remover venda — apenas `CANCELADA` e sem pagamentos)
 
 ---
 
@@ -469,10 +489,10 @@ export function autenticarToken(req, res, next) {
 
 ## 9.4. Model (SQL) + Controller + Routes — Usuários (autenticação)
 
-### `src/models/UsuarioModel.js`
+### `src/modulos/usuario/model/UsuarioModel.js`
 
 ```js
-import { query } from "../database/db.js";
+import { query } from "../../../database/db.js";
 import bcrypt from "bcryptjs";
 
 export default class UsuarioModel {
@@ -496,10 +516,10 @@ export default class UsuarioModel {
 }
 ```
 
-### `src/controllers/UsuarioController.js`
+### `src/modulos/usuario/controller/UsuarioController.js`
 
 ```js
-import UsuarioModel from "../models/UsuarioModel.js";
+import UsuarioModel from "../model/UsuarioModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
@@ -566,18 +586,20 @@ export default class UsuarioController {
 }
 ```
 
-### `src/routes/usuarioRoutes.js`
+### `src/modulos/usuario/route/usuarioRoutes.js`
 
 ```js
 import express from "express";
-import UsuarioController from "../controllers/UsuarioController.js";
-import { autenticarToken } from "../middlewares/authMiddleware.js";
+import UsuarioController from "../controller/UsuarioController.js";
+import { autenticarToken } from "../../../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
 router.post("/cadastro", UsuarioController.cadastrar);
 router.post("/login", UsuarioController.login);
-router.get("/perfil", autenticarToken, UsuarioController.perfil);
+
+router.use(autenticarToken);
+router.get("/perfil", UsuarioController.perfil);
 
 export default router;
 ```
@@ -586,10 +608,10 @@ export default router;
 
 ## 9.5. Model + Controller + Routes — Clientes
 
-### `src/models/ClienteModel.js`
+### `src/modulos/cliente/model/ClienteModel.js`
 
 ```js
-import { query } from "../database/db.js";
+import { query } from "../../../database/db.js";
 
 export default class ClienteModel {
   static async listar() {
@@ -612,10 +634,10 @@ export default class ClienteModel {
 }
 ```
 
-### `src/controllers/ClienteController.js`
+### `src/modulos/cliente/controller/ClienteController.js`
 
 ```js
-import ClienteModel from "../models/ClienteModel.js";
+import ClienteModel from "../model/ClienteModel.js";
 
 export default class ClienteController {
   static async criar(req, res) {
@@ -645,12 +667,12 @@ export default class ClienteController {
 }
 ```
 
-### `src/routes/clienteRoutes.js`
+### `src/modulos/cliente/route/clienteRoutes.js`
 
 ```js
 import express from "express";
-import ClienteController from "../controllers/ClienteController.js";
-import { autenticarToken } from "../middlewares/authMiddleware.js";
+import ClienteController from "../controller/ClienteController.js";
+import { autenticarToken } from "../../../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -665,10 +687,10 @@ export default router;
 
 ## 9.6. Model + Controller + Routes — Veículos (estoque)
 
-### `src/models/VeiculoModel.js`
+### `src/modulos/veiculo/model/VeiculoModel.js`
 
 ```js
-import { query } from "../database/db.js";
+import { query } from "../../../database/db.js";
 
 export default class VeiculoModel {
   static async listar() {
@@ -697,10 +719,10 @@ export default class VeiculoModel {
 }
 ```
 
-### `src/controllers/VeiculoController.js`
+### `src/modulos/veiculo/controller/VeiculoController.js`
 
 ```js
-import VeiculoModel from "../models/VeiculoModel.js";
+import VeiculoModel from "../model/VeiculoModel.js";
 
 export default class VeiculoController {
   static async criar(req, res) {
@@ -729,12 +751,12 @@ export default class VeiculoController {
 }
 ```
 
-### `src/routes/veiculoRoutes.js`
+### `src/modulos/veiculo/route/veiculoRoutes.js`
 
 ```js
 import express from "express";
-import VeiculoController from "../controllers/VeiculoController.js";
-import { autenticarToken } from "../middlewares/authMiddleware.js";
+import VeiculoController from "../controller/VeiculoController.js";
+import { autenticarToken } from "../../../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -756,10 +778,10 @@ Nesta versão, a regra é aplicada assim:
 
 Para evitar condições de corrida, usamos **transação SQL**.
 
-### `src/models/VendaModel.js`
+### `src/modulos/venda/model/VendaModel.js`
 
 ```js
-import { pool } from "../database/db.js";
+import { pool } from "../../../database/db.js";
 
 export default class VendaModel {
   static async criarVenda({ veiculo_id, cliente_id, usuario_id, preco_final }) {
@@ -852,10 +874,10 @@ export default class VendaModel {
 }
 ```
 
-### `src/controllers/VendaController.js`
+### `src/modulos/venda/controller/VendaController.js`
 
 ```js
-import VendaModel from "../models/VendaModel.js";
+import VendaModel from "../model/VendaModel.js";
 
 export default class VendaController {
   static async criar(req, res) {
@@ -920,12 +942,12 @@ export default class VendaController {
 }
 ```
 
-### `src/routes/vendaRoutes.js`
+### `src/modulos/venda/route/vendaRoutes.js`
 
 ```js
 import express from "express";
-import VendaController from "../controllers/VendaController.js";
-import { autenticarToken } from "../middlewares/authMiddleware.js";
+import VendaController from "../controller/VendaController.js";
+import { autenticarToken } from "../../../middlewares/authMiddleware.js";
 
 const router = express.Router();
 
@@ -949,10 +971,10 @@ export default router;
 import express from "express";
 import dotenv from "dotenv";
 
-import usuarioRoutes from "./routes/usuarioRoutes.js";
-import clienteRoutes from "./routes/clienteRoutes.js";
-import veiculoRoutes from "./routes/veiculoRoutes.js";
-import vendaRoutes from "./routes/vendaRoutes.js";
+import usuarioRoutes from "./modulos/usuario/route/usuarioRoutes.js";
+import clienteRoutes from "./modulos/cliente/route/clienteRoutes.js";
+import veiculoRoutes from "./modulos/veiculo/route/veiculoRoutes.js";
+import vendaRoutes from "./modulos/venda/route/vendaRoutes.js";
 
 dotenv.config();
 
@@ -986,7 +1008,7 @@ app.listen(process.env.PORT, () => {
 ## 11. Próximas melhorias (para evolução)
 
 - Tratar erros de UNIQUE (`email`, `documento`, `vin`) com mensagens específicas (sem vazar detalhes internos)
-- Implementar listagem de vendas com join (cliente, veículo, vendedor)
+- Melhorar listagem de vendas (paginação/filtros)
 - Padronizar validações e erros (ex.: camada de validator)
 - Adicionar testes de integração (Supertest) e testes com banco local
 - Criar um script de migration incremental (ou adotar ferramenta de migrations sem ORM)
