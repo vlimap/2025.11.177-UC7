@@ -10,6 +10,7 @@ export default class UsuarioModel {
         id,
         nome,
         email,
+        perfil,
         criado_em
       FROM usuarios
       ORDER BY criado_em DESC
@@ -25,6 +26,7 @@ export default class UsuarioModel {
         id,
         nome,
         email,
+        perfil,
         criado_em
       FROM usuarios
       WHERE id = $1
@@ -36,18 +38,19 @@ export default class UsuarioModel {
 
   static async buscarPorEmail(email) {
     // Para login, precisamos do senha_hash.
-    const sql = `
+    const consulta = `
       SELECT
         id,
         nome,
         email,
+        perfil,
         senha_hash,
         criado_em
       FROM usuarios
       WHERE email = $1
     `;
-
-    const result = await query(sql, [email]);
+    const dados = [email];
+    const result = await query(consulta, dados);
     return result.rows[0] ?? null;
   }
 
@@ -55,22 +58,23 @@ export default class UsuarioModel {
     // Nunca salvamos a senha “pura” no banco.
     const senhaHash = await bcrypt.hash(senha, 10);
 
-    const sql = `
+    const consulta = `
       INSERT INTO usuarios (
         nome,
         email,
+        perfil,
         senha_hash
       )
-      VALUES ($1, $2, $3)
+      VALUES ($1, $2, $3, $4)
       RETURNING
         id,
         nome,
         email,
+        perfil,
         criado_em
     `;
-
-    const params = [nome, email, senhaHash];
-    const result = await query(sql, params);
+    const dados = [nome, email, "user", senhaHash];
+    const result = await query(consulta, dados);
     return result.rows[0];
   }
 

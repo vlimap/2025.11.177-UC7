@@ -45,13 +45,19 @@ export default class UsuarioController {
       // Compara senha digitada com o hash salvo no banco
       const senhaValida = await bcrypt.compare(senha, usuario.senha_hash);
       if (!senhaValida) {
-        return res.status(401).json({ erro: "Senha incorreta" });
+        return res.status(401).json({ erro: "E-mail ou enha incorreta" });
       }
 
       const token = jwt.sign(
-        { id: usuario.id, email: usuario.email },
-        process.env.JWT_SECRET,
-        { expiresIn: process.env.JWT_EXPIRES_IN ?? "1h" }
+        { 
+          id: usuario.id, 
+          email: usuario.email,
+          perfil: usuario.perfil
+        },
+          process.env.JWT_SECRET,
+        { 
+          expiresIn: process.env.JWT_EXPIRES_IN
+        }
       );
 
       return res.json({ mensagem: "Login bem-sucedido!", token });
@@ -120,8 +126,8 @@ export default class UsuarioController {
     try {
       const { id } = req.params;
 
-      const removido = await UsuarioModel.deletar(id);
-      if (!removido) {
+      const usuario = await UsuarioModel.deletar(id);
+      if (!usuario) {
         return res.status(404).json({ erro: "Usuário não encontrado" });
       }
 

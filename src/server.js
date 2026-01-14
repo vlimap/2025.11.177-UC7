@@ -18,9 +18,8 @@ const app = express();
 // Sem isso, req.body vem undefined em POST/PUT/PATCH com JSON.
 app.use(express.json());
 
-// Endpoint simples para verificar se a API está no ar.
-// Útil para testes e para monitoramento.
-app.get("/health", (req, res) => res.json({ status: "ok" }));
+
+app.get("/", (req, res) => res.json({ status: "ok" }));
 
 // Rotas do sistema, separadas por domínio.
 // A URL base (prefixo) fica aqui e as rotas específicas ficam nos arquivos de routes/.
@@ -34,4 +33,5 @@ app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Servidor rodando em http://localhost:${process.env.PORT}`);
 });
+
 

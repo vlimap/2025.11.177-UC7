@@ -47,11 +47,8 @@ export default class VeiculoModel {
     return result.rows[0] ?? null;
   }
 
-  static async criar(dados) {
-    const {
-      vin, marca, modelo, ano_modelo, cor, km, preco_compra, preco_venda, status
-    } = dados;
-
+  static async criar({vin, marca, modelo, ano_modelo, cor, km, preco_compra, preco_venda, status}) {
+    
     // Insere um novo veículo.
     // - km default: 0
     // - status default: DISPONIVEL

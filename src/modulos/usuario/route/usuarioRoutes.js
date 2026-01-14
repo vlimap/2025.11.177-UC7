@@ -1,6 +1,7 @@
 import express from "express";
 import UsuarioController from "../controller/UsuarioController.js";
 import { autenticarToken } from "../../../middlewares/authMiddleware.js";
+import autorization from "../../../middlewares/autorizationMiddleware.js";
 
 // Router de Usuário.
 // Observação: mantemos cadastro/login públicos.
@@ -22,8 +23,8 @@ router.get("/perfil", UsuarioController.perfil);
 // GET /usuarios
 router.get("/", UsuarioController.listar);
 
-// GET /usuarios/:id
-router.get("/:id", UsuarioController.buscarPorId);
+// GET /usuarios/3
+router.get("/:id", autorization["admin"], UsuarioController.buscarPorId);
 
 // PUT /usuarios/:id
 router.put("/:id", UsuarioController.atualizar);

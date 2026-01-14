@@ -1,0 +1,863 @@
+{
+  "_type": "export",
+  "__export_format": 4,
+  "__export_date": "2026-01-09T00:00:00.000Z",
+  "__export_source": "insomnia.desktop.app:v2023.5.8",
+  "resources": [
+    {
+      "_id": "req_health_check",
+      "parentId": "fld_root",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/health",
+      "name": "Health Check",
+      "description": "Verifica se a API está funcionando",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [],
+      "authentication": {},
+      "metaSortKey": -1704758400000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_usuario_cadastro",
+      "parentId": "fld_usuarios",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/usuarios/cadastro",
+      "name": "Cadastrar Usuário",
+      "description": "Cria um novo usuário no sistema",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"João Silva\",\n  \"email\": \"joao@example.com\",\n  \"senha\": \"senha123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758400000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_usuario_login",
+      "parentId": "fld_usuarios",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/usuarios/login",
+      "name": "Login",
+      "description": "Autentica usuário e retorna token JWT",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"email\": \"joao@example.com\",\n  \"senha\": \"senha123\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758399000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_usuario_perfil",
+      "parentId": "fld_usuarios",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/usuarios/perfil",
+      "name": "Ver Perfil",
+      "description": "Retorna dados do usuário logado",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758398000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_usuario_listar",
+      "parentId": "fld_usuarios",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/usuarios",
+      "name": "Listar Usuários",
+      "description": "Lista todos os usuários",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758397000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_usuario_buscar_id",
+      "parentId": "fld_usuarios",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/usuarios/1",
+      "name": "Buscar Usuário por ID",
+      "description": "Busca usuário específico pelo ID",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758396000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_usuario_atualizar",
+      "parentId": "fld_usuarios",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/usuarios/1",
+      "name": "Atualizar Usuário",
+      "description": "Atualiza dados do usuário",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"João Silva Atualizado\",\n  \"email\": \"joao.novo@example.com\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758395000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_usuario_deletar",
+      "parentId": "fld_usuarios",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/usuarios/1",
+      "name": "Deletar Usuário",
+      "description": "Remove usuário do sistema",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758394000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_cliente_criar",
+      "parentId": "fld_clientes",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/clientes",
+      "name": "Criar Cliente",
+      "description": "Cadastra um novo cliente",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Maria Oliveira\",\n  \"documento\": \"12345678900\",\n  \"email\": \"maria@example.com\",\n  \"telefone\": \"11987654321\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758400000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_cliente_listar",
+      "parentId": "fld_clientes",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/clientes",
+      "name": "Listar Clientes",
+      "description": "Lista todos os clientes",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758399000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_cliente_buscar_id",
+      "parentId": "fld_clientes",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/clientes/1",
+      "name": "Buscar Cliente por ID",
+      "description": "Busca cliente específico pelo ID",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758398000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_cliente_atualizar",
+      "parentId": "fld_clientes",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/clientes/1",
+      "name": "Atualizar Cliente",
+      "description": "Atualiza dados do cliente",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"nome\": \"Maria Oliveira Santos\",\n  \"documento\": \"12345678900\",\n  \"email\": \"maria.santos@example.com\",\n  \"telefone\": \"11999887766\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758397000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_cliente_deletar",
+      "parentId": "fld_clientes",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/clientes/1",
+      "name": "Deletar Cliente",
+      "description": "Remove cliente do sistema",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758396000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_veiculo_criar",
+      "parentId": "fld_veiculos",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/veiculos",
+      "name": "Criar Veículo",
+      "description": "Cadastra um novo veículo",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"vin\": \"9BWZZZ377VT004251\",\n  \"marca\": \"Toyota\",\n  \"modelo\": \"Corolla\",\n  \"ano_modelo\": 2023,\n  \"cor\": \"Prata\",\n  \"km\": 0,\n  \"preco_compra\": 100000.00,\n  \"preco_venda\": 120000.00\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758400000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_veiculo_listar",
+      "parentId": "fld_veiculos",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/veiculos",
+      "name": "Listar Veículos",
+      "description": "Lista todos os veículos",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758399000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_veiculo_buscar_id",
+      "parentId": "fld_veiculos",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/veiculos/1",
+      "name": "Buscar Veículo por ID",
+      "description": "Busca veículo específico pelo ID",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758398000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_veiculo_atualizar",
+      "parentId": "fld_veiculos",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/veiculos/1",
+      "name": "Atualizar Veículo",
+      "description": "Atualiza dados do veículo",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"vin\": \"9BWZZZ377VT004251\",\n  \"marca\": \"Toyota\",\n  \"modelo\": \"Corolla\",\n  \"ano_modelo\": 2023,\n  \"cor\": \"Preto\",\n  \"km\": 5000,\n  \"preco_compra\": 100000.00,\n  \"preco_venda\": 115000.00,\n  \"status\": \"DISPONIVEL\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758397000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_veiculo_inativar",
+      "parentId": "fld_veiculos",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/veiculos/1",
+      "name": "Inativar Veículo",
+      "description": "Inativa veículo (soft delete)",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758396000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_venda_listar",
+      "parentId": "fld_vendas",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/vendas",
+      "name": "Listar Vendas",
+      "description": "Lista todas as vendas",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758400000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_venda_criar",
+      "parentId": "fld_vendas",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/vendas",
+      "name": "Criar Venda",
+      "description": "Registra uma nova venda",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"veiculo_id\": \"ID_VEICULO_UUID\",\n  \"cliente_id\": \"ID_CLIENTE_UUID\",\n  \"preco_final\": 120000.00\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758399000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_venda_buscar_id",
+      "parentId": "fld_vendas",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/vendas/1",
+      "name": "Buscar Venda por ID",
+      "description": "Busca venda específica pelo ID",
+      "method": "GET",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758398000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_venda_atualizar",
+      "parentId": "fld_vendas",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/vendas/1",
+      "name": "Atualizar Venda",
+      "description": "Atualiza dados da venda",
+      "method": "PUT",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"preco_final\": 118000.00\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758397000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_venda_concluir",
+      "parentId": "fld_vendas",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/vendas/1/concluir",
+      "name": "Concluir Venda",
+      "description": "Marca a venda como concluída",
+      "method": "PATCH",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758396000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_venda_cancelar",
+      "parentId": "fld_vendas",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/vendas/1/cancelar",
+      "name": "Cancelar Venda",
+      "description": "Cancela uma venda",
+      "method": "PATCH",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758395000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_venda_pagamento",
+      "parentId": "fld_vendas",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/vendas/1/pagamentos",
+      "name": "Adicionar Pagamento",
+      "description": "Adiciona um pagamento à venda",
+      "method": "POST",
+      "body": {
+        "mimeType": "application/json",
+        "text": "{\n  \"metodo\": \"PIX\",\n  \"valor\": 40000.00,\n  \"pago_em\": \"2026-01-09T12:00:00Z\"\n}"
+      },
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Content-Type",
+          "value": "application/json"
+        },
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758394000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "req_venda_deletar",
+      "parentId": "fld_vendas",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "url": "http://localhost:3000/vendas/1",
+      "name": "Deletar Venda",
+      "description": "Remove venda do sistema",
+      "method": "DELETE",
+      "body": {},
+      "parameters": [],
+      "headers": [
+        {
+          "name": "Authorization",
+          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+        }
+      ],
+      "authentication": {},
+      "metaSortKey": -1704758393000,
+      "isPrivate": false,
+      "settingStoreCookies": true,
+      "settingSendCookies": true,
+      "settingDisableRenderRequestBody": false,
+      "settingEncodeUrl": true,
+      "settingRebuildPath": true,
+      "settingFollowRedirects": "global",
+      "_type": "request"
+    },
+    {
+      "_id": "fld_root",
+      "parentId": "wrk_main",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "name": "API Principal",
+      "description": "",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704758400000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_usuarios",
+      "parentId": "wrk_main",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "name": "Usuários",
+      "description": "Rotas de gestão de usuários",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704758399000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_clientes",
+      "parentId": "wrk_main",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "name": "Clientes",
+      "description": "Rotas de gestão de clientes",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704758398000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_veiculos",
+      "parentId": "wrk_main",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "name": "Veículos",
+      "description": "Rotas de gestão de veículos",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704758397000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "fld_vendas",
+      "parentId": "wrk_main",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "name": "Vendas",
+      "description": "Rotas de gestão de vendas",
+      "environment": {},
+      "environmentPropertyOrder": null,
+      "metaSortKey": -1704758396000,
+      "_type": "request_group"
+    },
+    {
+      "_id": "wrk_main",
+      "parentId": null,
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "name": "Dealership API",
+      "description": "API de gerenciamento de concessionária de veículos",
+      "scope": "collection",
+      "_type": "workspace"
+    }
+  ]
+}

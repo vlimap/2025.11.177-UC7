@@ -1,7 +1,5 @@
 import pg from "pg";
-import dotenv from "dotenv";
-
-dotenv.config();
+import dotenv from "dotenv/config";
 
 const { Pool } = pg;
 
@@ -18,7 +16,7 @@ export const pool = new Pool({
 // Helper simples para executar SQL parametrizado.
 // - text: string com o SQL (use $1, $2, ...)
 // - params: array com os valores na mesma ordem dos placeholders
-// 
+ 
 // Por que usar parâmetros?
 // - Evita SQL Injection
 // - Deixa o SQL mais legível e seguro
