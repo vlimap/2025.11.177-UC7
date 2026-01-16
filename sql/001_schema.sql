@@ -8,10 +8,10 @@ CREATE TABLE
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4 (),
     nome TEXT NOT NULL,
     email TEXT NOT NULL UNIQUE,
-    perfil TEXT NOT NULL DEFAULT 'user',
+    perfil TEXT NOT NULL,
     senha_hash TEXT NOT NULL,
     criado_em TIMESTAMPTZ NOT NULL DEFAULT now (),
-    CONSTRAINT usuarios_perfil_chk CHECK (perfil IN ('admin', 'user'))
+    CONSTRAINT usuarios_perfil_chk CHECK (perfil IN ('admin', 'seller', 'cliente'))
   );
 
 -- CLIENTES (compradores)

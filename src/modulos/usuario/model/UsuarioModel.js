@@ -54,7 +54,7 @@ export default class UsuarioModel {
     return result.rows[0] ?? null;
   }
 
-  static async criar({ nome, email, senha }) {
+  static async criar({ nome, email, senha, perfil = "seller" }) {
     // Nunca salvamos a senha “pura” no banco.
     const senhaHash = await bcrypt.hash(senha, 10);
 
@@ -73,7 +73,7 @@ export default class UsuarioModel {
         perfil,
         criado_em
     `;
-    const dados = [nome, email, "user", senhaHash];
+    const dados = [nome, email, perfil, senhaHash];
     const result = await query(consulta, dados);
     return result.rows[0];
   }

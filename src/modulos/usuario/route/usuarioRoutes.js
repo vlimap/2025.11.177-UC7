@@ -8,23 +8,20 @@ import autorization from "../../../middlewares/autorizationMiddleware.js";
 // CRUD e perfil ficam protegidos por JWT.
 const router = express.Router();
 
-// POST /usuarios/cadastro
+// POST /usuarios/cadastro - rotas publicas
 router.post("/cadastro", UsuarioController.cadastrar);
 
-// POST /usuarios/login
+// POST /usuarios/login - rotas publicas
 router.post("/login", UsuarioController.login);
 
-// A partir daqui, todas as rotas exigem autenticação.
-router.use(autenticarToken);
-
-// GET /usuarios/perfil
-router.get("/perfil", UsuarioController.perfil);
+// GET /usuarios/perfil - rota privada
+router.get("/perfil", autenticarToken, UsuarioController.perfil);
 
 // GET /usuarios
-router.get("/", UsuarioController.listar);
+router.get("/", autenticarToken, autorization["admin"] , UsuarioController.listar);
 
 // GET /usuarios/3
-router.get("/:id", autorization["admin"], UsuarioController.buscarPorId);
+router.get("/:id", autenticarToken, autorization["admin"], UsuarioController.buscarPorId);
 
 // PUT /usuarios/:id
 router.put("/:id", UsuarioController.atualizar);

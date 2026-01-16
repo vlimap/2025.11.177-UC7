@@ -1,38 +1,28 @@
-function normalizePerfil(perfil) {
-	return String(perfil ?? "").trim().toLowerCase();
-}
+// Middleware para permitir acesso baseado em perfis de usuário.
 
-function permitirPerfis(...perfisPermitidos) {
-	const permitidos = new Set(perfisPermitidos.map(normalizePerfil));
+// Retorna um middleware que verifica se o perfil do usuário está na lista de perfis permitidos.
+// Se o perfil estiver permitido, chama a próxima função de middleware; caso contrário, retorna um erro 403.
+
+// Retorna um objeto JSON com um erro se o acesso for negado.
+export function permitirPerfis() {
+	// Perfis permitidos hardcoded
+	const lista = []; // Exemplo de perfis permitidos
 
 	return (req, res, next) => {
-		// O perfil vem do JWT, mas quem decodifica o token é o middleware `autenticarToken`.
-		// Então aqui só usamos `req.usuario`.
-		if (!req.usuario) {
-			return res.status(401).json({ erro: "Não autenticado" });
+		const perfil = req.usuario && req.usuario.perfil;
+		if (lista.includes(perfil)) {
+			return next();
 		}
 
-		const perfil = normalizePerfil(req.usuario.perfil);
-		if (!perfil) {
-			return res.status(403).json({ erro: "Acesso negado: perfil não informado" });
-		}
-
-		if (!permitidos.has(perfil)) {
-			return res.status(403).json({ erro: "Acesso negado: perfil sem permissão" });
-		}
-
-		return next();
+		return res.status(403).json({ erro: "Acesso negado" });
 	};
 }
 
 // Mantém o nome usado nas rotas: autorization['admin'].
 // Observação: o token precisa conter `perfil` (ex.: "admin").
 export const autorization = {
-	admin: permitirPerfis("admin"),
-	user: permitirPerfis("user"),
-	funcionario: permitirPerfis("funcionario"),
+	admin: permitirPerfis(["admin"]),
+	seller: permitirPerfis(["seller"])
 };
-
-export { permitirPerfis };
 
 export default autorization;

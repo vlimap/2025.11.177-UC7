@@ -34,11 +34,11 @@
       "created": 1704758400000,
       "url": "http://localhost:3000/usuarios/cadastro",
       "name": "Cadastrar Usuário",
-      "description": "Cria um novo usuário no sistema",
+      "description": "Cria um novo usuário no sistema (perfil seller por padrão)",
       "method": "POST",
       "body": {
         "mimeType": "application/json",
-        "text": "{\n  \"nome\": \"João Silva\",\n  \"email\": \"joao@example.com\",\n  \"senha\": \"senha123\"\n}"
+        "text": "{\n  \"nome\": \"João Silva\",\n  \"email\": \"joao@example.com\",\n  \"senha\": \"senha123\",\n  \"perfil\": \"seller\"\n}"
       },
       "parameters": [],
       "headers": [
@@ -103,7 +103,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -131,7 +131,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -159,7 +159,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -194,7 +194,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -222,7 +222,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -257,7 +257,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -285,7 +285,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -313,7 +313,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -348,7 +348,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -376,7 +376,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -411,7 +411,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -439,7 +439,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -467,7 +467,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -502,7 +502,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -530,7 +530,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -558,7 +558,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -593,7 +593,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -621,7 +621,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -656,7 +656,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -684,7 +684,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -712,7 +712,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -747,7 +747,7 @@
         },
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -775,7 +775,7 @@
       "headers": [
         {
           "name": "Authorization",
-          "value": "Bearer SEU_TOKEN_JWT_AQUI"
+          "value": "Bearer {{ _.token }}"
         }
       ],
       "authentication": {},
@@ -788,6 +788,25 @@
       "settingRebuildPath": true,
       "settingFollowRedirects": "global",
       "_type": "request"
+    },
+    {
+      "_id": "env_base",
+      "parentId": "wrk_main",
+      "modified": 1704758400000,
+      "created": 1704758400000,
+      "name": "Base Environment",
+      "data": {
+        "base_url": "http://localhost:3000",
+        "token": "",
+        "token_admin": "",
+        "token_seller": "",
+        "token_cliente": ""
+      },
+      "dataPropertyOrder": null,
+      "color": null,
+      "isPrivate": false,
+      "metaSortKey": -1704758392500,
+      "_type": "environment"
     },
     {
       "_id": "fld_root",

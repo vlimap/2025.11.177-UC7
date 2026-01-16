@@ -11,7 +11,7 @@ dotenv.config();
 export default class UsuarioController {
   static async cadastrar(req, res) {
     try {
-      const { nome, email, senha } = req.body;
+      const { nome, email, senha, perfil } = req.body;
 
       if (!nome || !email || !senha) {
         return res.status(400).json({ erro: "nome, email e senha são obrigatórios" });
@@ -22,7 +22,17 @@ export default class UsuarioController {
         return res.status(400).json({ erro: "E-mail já cadastrado!" });
       }
 
-      const novoUsuario = await UsuarioModel.criar({ nome, email, senha });
+      // Perfis válidos: admin, seller, cliente
+      const perfilNormalizado = String(perfil ?? "seller").trim().toLowerCase();
+      const perfisPermitidos = ["admin", "seller", "cliente"];
+
+      if (!perfisPermitidos.includes(perfilNormalizado)) {
+        return res
+          .status(400)
+          .json({ erro: "perfil inválido. Use: admin, seller, cliente" });
+      }
+
+      const novoUsuario = await UsuarioModel.criar({ nome, email, senha, perfil: perfilNormalizado });
       return res.status(201).json({ mensagem: "Usuário criado com sucesso!", usuario: novoUsuario });
     } catch (erro) {
       return res.status(500).json({ erro: erro.message });

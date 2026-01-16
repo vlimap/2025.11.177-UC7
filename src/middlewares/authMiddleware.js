@@ -16,6 +16,7 @@ export function autenticarToken(req, res, next) {
 
   // Se existir, separa por espaço e pega a segunda parte.
   // "Bearer <token>" -> token fica no índice 1.
+  // Normal mente o token é retornado assim: Bearer ejyasdwmwmrksdadnasd
   const token = authHeader && authHeader.split(" ")[1];
 
   // Se não há token, a pessoa não está autenticada.
