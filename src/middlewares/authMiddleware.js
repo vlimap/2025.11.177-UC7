@@ -30,7 +30,7 @@ export function autenticarToken(req, res, next) {
     const usuario = jwt.verify(token, process.env.JWT_SECRET);
 
     // Disponibiliza o usuário para os próximos handlers.
-    // Assim o controller consegue acessar req.usuario.id, req.usuario.email, etc.
+    // Assim o controller consegue acessar req.usuario.id, req.usuario.email, etc. 
     req.usuario = usuario;
 
     // next() faz o Express continuar para o próximo middleware/rota/controller.
