@@ -87,12 +87,8 @@ export const Usuario = sequelize.define(
       },
     },
     perfil: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM("admin", "seller", "cliente"),
       allowNull: false,
-      validate: {
-        notEmpty: true,
-        isIn: [["admin", "seller", "cliente"]],
-      },
     },
     senha_hash: {
       type: DataTypes.STRING,
@@ -273,12 +269,9 @@ export const Veiculo = sequelize.define(
       },
     },
     status: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM("DISPONIVEL", "RESERVADO", "VENDIDO", "INATIVO"),
       allowNull: false,
       defaultValue: "DISPONIVEL",
-      validate: {
-        isIn: [["DISPONIVEL", "RESERVADO", "VENDIDO", "INATIVO"]],
-      },
     },
     criado_em: {
       type: DataTypes.DATE,
@@ -353,12 +346,9 @@ export const Venda = sequelize.define(
       onDelete: "RESTRICT",
     },
     status: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM("NEGOCIACAO", "CANCELADA", "CONCLUIDA"),
       allowNull: false,
       defaultValue: "NEGOCIACAO",
-      validate: {
-        isIn: [["NEGOCIACAO", "CANCELADA", "CONCLUIDA"]],
-      },
     },
     preco_final: {
       type: DataTypes.DECIMAL(12, 2),
@@ -411,11 +401,14 @@ export const PagamentoVenda = sequelize.define(
       onDelete: "CASCADE",
     },
     metodo: {
-      type: DataTypes.STRING,
+      type: DataTypes.ENUM(
+        "PIX",
+        "DINHEIRO",
+        "CARTAO",
+        "TRANSFERENCIA",
+        "FINANCIAMENTO",
+      ),
       allowNull: false,
-      validate: {
-        isIn: [["PIX", "DINHEIRO", "CARTAO", "TRANSFERENCIA", "FINANCIAMENTO"]],
-      },
     },
     valor: {
       type: DataTypes.DECIMAL(12, 2),
